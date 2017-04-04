@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="../js/jquery-3.2.0.js"></script>
+    <script>
+
+        function createRect(x, y) {
+            var rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            rect.setAttribute("x", x);
+            rect.setAttribute("y", y);
+            rect.setAttribute("width", "100");
+            rect.setAttribute("height", "30");
+            rect.setAttribute("style", function () {
+                var rv = "";
+                rv += "fill:rgb(255,255,255);"
+                rv += "stroke-width:1;"
+                rv += "stroke:rgb(0,0,0);"
+                return rv;
+            }());
+            return rect;
+        }
+
+        $(function () {
+            with ({canvas: $("svg#canvas")}) {
+                canvas.click(function (ev) {
+                    var offset = canvas.offset();
+                    var x = ev.pageX - offset.left;
+                    var y = ev.pageY - offset.top;
+                    var rect = createRect(x, y);
+                    canvas.append(rect);
+                })
+            }
+        })
+
+    </script>
+</head>
+<body>
+
+<svg id="canvas" width="500" height="400" style="left: 100px; top: 10px; position: absolute; border: 1px black dashed">
+</svg>
+
+</body>
+</html>
+
